@@ -1,15 +1,15 @@
 ﻿using Npgsql;
+using System.Configuration;
 
 namespace ApiCalles.DAO.Connection
 {
     public class Conexion
     {
         NpgsqlConnection conexion = new NpgsqlConnection();
-
         public NpgsqlConnection abrirConexion()
         {
-            conexion.ConnectionString = "server=localhost;port=5432;user id=usuario_calles;password=calles2022;database=db_calles;";
-
+            string conectionStringCalles = ConfigurationManager.ConnectionStrings["dbcalles"].ConnectionString;
+            conexion.ConnectionString = conectionStringCalles;
             if (conexion.State != System.Data.ConnectionState.Open)
             {
                 conexion.Open();
@@ -24,8 +24,6 @@ namespace ApiCalles.DAO.Connection
             {
                 conexion.Close();
             }
-
-            
 
             return conexion;
         }

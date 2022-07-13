@@ -29,39 +29,46 @@ namespace ApiCalles
         public string insertarCalle(string STR_MAN_ID, string STR_VAN_DESCRIPCION, string FECHA)
         {
             string mensaje = "correcto";
-            bool error = false;
-            if (string.IsNullOrEmpty(STR_MAN_ID))
+            
+            if (validaEntradas(STR_MAN_ID, STR_VAN_DESCRIPCION, FECHA))
             {
-                error = true;
-                mensaje = "incorrecto";
-            }
-            if (string.IsNullOrEmpty(STR_VAN_DESCRIPCION))
-            {
-                error = true;
-                mensaje = "incorrecto";
-            }
-            if (string.IsNullOrEmpty(FECHA))
-            {
-                error = true;
-                mensaje = "incorrecto";
-            }
-
-            DateTime dt;
-            if (!DateTime.TryParse(FECHA.Trim(), out dt))
-            {
-                error = true;
-                mensaje = "incorrecto";
-            }
-
-            if (!error)
-            {
+                DateTime dt;
+                DateTime.TryParse(FECHA.Trim(), out dt);
                 CalleDTO calleDTO = new CalleDTO(1, STR_MAN_ID.Trim(), STR_VAN_DESCRIPCION.Trim(), dt);
                 calleDTO = calleService.insertar(calleDTO);
 
             }
 
-            
             return mensaje;
+        }
+
+        private bool validaEntradas(string STR_MAN_ID, string STR_VAN_DESCRIPCION, string FECHA)
+        {
+            bool validado = true;
+
+            if (string.IsNullOrEmpty(STR_MAN_ID))
+            {
+                validado = false;
+               
+            }
+            if (string.IsNullOrEmpty(STR_VAN_DESCRIPCION))
+            {
+                validado = false;
+                
+            }
+            if (string.IsNullOrEmpty(FECHA))
+            {
+                validado = false;
+               
+            }
+
+            DateTime dt;
+            if (!DateTime.TryParse(FECHA.Trim(), out dt))
+            {
+                validado = false;
+            }
+
+            return validado;
         }
         
     }

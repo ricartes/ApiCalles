@@ -7,17 +7,19 @@ namespace ApiCalles.DTO
 {
     public class CalleDTO
     {
-        public int STR_VAN_ID;
-        public string STR_MAN_ID;
-        public string STR_VAN_DESCRIPCION;
-        public DateTime STR_FECHA;
+        public int STRT_CODE;
+        public string CITY_CODE;
+        public string CITY_NAME;
+        public string STREET;
+        public DateTime FECHA;
 
-        public CalleDTO(int STR_VAN_ID, string STR_MAN_ID, string STR_VAN_DESCRIPCION, DateTime STR_FECHA)
+        public CalleDTO(int STRT_CODE, string CITY_CODE, string CITY_NAME, string STREET, DateTime FECHA)
         {
-            this.STR_VAN_ID = STR_VAN_ID;
-            this.STR_MAN_ID = STR_MAN_ID;
-            this.STR_VAN_DESCRIPCION = STR_VAN_DESCRIPCION;
-            this.STR_FECHA = STR_FECHA;
+            this.STRT_CODE = STRT_CODE;
+            this.CITY_CODE = CITY_CODE;
+            this.CITY_NAME = CITY_NAME;
+            this.STREET = STREET;
+            this.FECHA = FECHA;
         }
     }
 }

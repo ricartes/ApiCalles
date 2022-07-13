@@ -20,11 +20,12 @@ namespace ApiCalles.DAO
         
         public  CalleDTO insertar(CalleDTO registro)
         {
-            string query = "INSERT INTO \"CALLE\" (\"STR_MAN_ID\", \"STR_VAN_DESCRIPCION\") VALUES (:STR_MAN_ID, :STR_VAN_DESCRIPCION)";
+            string query = "INSERT INTO \"QRY_CALLES\" (\"CITY_NAME\", \"STREET\", \"FECHA\") VALUES (:CITY_NAME, :STREET, :FECHA)";
             NpgsqlConnection conn = conexion.abrirConexion();
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            command.Parameters.AddWithValue("@STR_MAN_ID",  registro.STR_MAN_ID );
-            command.Parameters.AddWithValue("@STR_VAN_DESCRIPCION", registro.STR_VAN_DESCRIPCION);
+            command.Parameters.AddWithValue("@CITY_NAME",  registro.CITY_NAME);
+            command.Parameters.AddWithValue("@STREET", registro.STREET);
+            command.Parameters.AddWithValue("@FECHA", registro.FECHA);
             command.ExecuteNonQuery();
             conn = conexion.cerrarConexion();
 
@@ -34,11 +35,13 @@ namespace ApiCalles.DAO
 
         public long cantidadCalles(CalleDTO registro)
         {
-            string query = "SELECT COUNT (\"STR_VAN_ID\") FROM \"CALLE\" WHERE \"STR_VAN_DESCRIPCION\" = :STR_VAN_DESCRIPCION";
+            string query = "SELECT COUNT (\"STREET\") FROM \"QRY_CALLES\" WHERE UPPER(\"STREET\") = UPPER(:STREET) AND UPPER(\"CITY_NAME\") = UPPER(:CITY_NAME)";
             NpgsqlConnection conn = conexion.abrirConexion();
             
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            command.Parameters.AddWithValue("@STR_VAN_DESCRIPCION", registro.STR_VAN_DESCRIPCION);
+            command.Parameters.AddWithValue("@STREET", registro.STREET);
+            command.Parameters.AddWithValue("@CITY_NAME", registro.CITY_NAME);
+
             long resultado = (long)command.ExecuteScalar();
             conn = conexion.cerrarConexion();
 

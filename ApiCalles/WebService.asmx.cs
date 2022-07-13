@@ -26,17 +26,21 @@ namespace ApiCalles
         }
 
         [WebMethod]
-        public string insertarCalle(string STR_MAN_ID, string STR_VAN_DESCRIPCION, string FECHA)
+        public string insertarCalle(string SAP_VAN_DESCRIPCION, string COMUNA, string FECHA)
         {
             string mensaje = "correcto";
             
-            if (validaEntradas(STR_MAN_ID, STR_VAN_DESCRIPCION, FECHA))
+            if (validaEntradas(COMUNA, SAP_VAN_DESCRIPCION, FECHA))
             {
-                DateTime dt;
-                DateTime.TryParse(FECHA.Trim(), out dt);
-                CalleDTO calleDTO = new CalleDTO(1, STR_MAN_ID.Trim(), STR_VAN_DESCRIPCION.Trim(), dt);
+                DateTime fechaDateTime;
+                DateTime.TryParse(FECHA.Trim(), out fechaDateTime);
+                CalleDTO calleDTO = new CalleDTO(1, "1", COMUNA.Trim(), SAP_VAN_DESCRIPCION.Trim(), fechaDateTime);
                 calleDTO = calleService.insertar(calleDTO);
 
+            }
+            else
+            {
+                mensaje = "incorrecto";
             }
 
             return mensaje;

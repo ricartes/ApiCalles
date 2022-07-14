@@ -37,7 +37,6 @@ namespace ApiCalles.DAO
         {
             string query = "SELECT COUNT (\"STREET\") FROM \"QRY_CALLES\" WHERE UPPER(\"STREET\") = UPPER(:STREET) AND UPPER(\"CITY_NAME\") = UPPER(:CITY_NAME)";
             NpgsqlConnection conn = conexion.abrirConexion();
-            
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
             command.Parameters.AddWithValue("@STREET", registro.STREET);
             command.Parameters.AddWithValue("@CITY_NAME", registro.CITY_NAME);
